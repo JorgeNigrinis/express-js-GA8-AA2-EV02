@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
@@ -19,10 +20,10 @@ app.use(cors({
 }));
 
 app.use(session({
-  secret: 'cookies prueba',
+  secret: process.env.SESSION_SECRET || 'cookies prueba', // Usará la variable en producción
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: false } 
+  cookie: { secure: false } // Nota: Déjalo en false si tu frontend sigue en localhost sin HTTPS
 }));
 
 app.get('/', (req, res) => {
