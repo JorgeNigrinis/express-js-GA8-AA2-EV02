@@ -6,13 +6,14 @@ const authRoutes = require('./routes/auth');
 const vinosRoutes = require('./routes/vinos');
 
 const app = express();
-const port = 3000;
 
-mysql://root:BTFLZGckdUCjdCEIOvDiNNWoTYGulabs@reseau.proxy.rlwy.net:16982/railway
+// PASO 3: Configurar el puerto dinámico para Railway
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
 app.use(cors({
+  // Nota: Cuando despliegues tu frontend en la nube, deberás cambiar este 'http://localhost:5173' por la URL real de tu frontend
   origin: 'http://localhost:5173',
   credentials: true 
 }));
@@ -30,6 +31,8 @@ app.get('/', (req, res) => {
 
 app.use('/', authRoutes); 
 app.use('/vinos', vinosRoutes); 
+
+// Iniciar el servidor usando el puerto dinámico
 app.listen(port, () => {
-  console.log(`Servidor modular corriendo en http://localhost:${port}`);
+  console.log(`Servidor modular corriendo exitosamente en el puerto ${port}`);
 });
