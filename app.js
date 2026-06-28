@@ -16,7 +16,7 @@ app.use(express.json());
 
 app.use(cors({
   // Nota: Cuando despliegues tu frontend en la nube, deberás cambiar este 'http://localhost:5173' por la URL real de tu frontend
-  origin: 'http://localhost:5173',
+  origin: process.env.URLFRONTED || 'http://localhost:5173',
   credentials: true 
 }));
 
